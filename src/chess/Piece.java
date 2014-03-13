@@ -1,5 +1,7 @@
 package chess;
 
+import javax.swing.ImageIcon;
+
 public abstract class Piece {
 
 	private int row,col;
@@ -13,4 +15,5 @@ public abstract class Piece {
 	public int getCol(){
 		return col;
 	}
+	public abstract ImageIcon getIcon();
 }
