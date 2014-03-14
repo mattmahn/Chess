@@ -12,9 +12,9 @@ public class Rook extends Piece {
 	/**
 	 * Creates a rook piece with the location of ({@code row},{@code col}) on {@code team} team.
 	 *
-	 * @param row
-	 * @param col
-	 * @param team
+	 * @param row the row of this piece on the board
+	 * @param col the column of this piece on the board
+	 * @param team the team this piece belongs to
 	 */
 	public Rook(int row, int col, char team) {
 		super(row, col);
