@@ -52,7 +52,7 @@ public class Board extends JFrame {
 			return false;
 		}
 	}
-
+	
 	public void getValidLocations(Piece piece) {
 		List<Location> locs = piece.getMoveLocations();
 		Location pieceLocation = piece.getLocation();
@@ -115,9 +115,10 @@ public class Board extends JFrame {
 
 	// TODO create all different types of pieces and set their locations.
 	private void placeNewSetOfPeices() {
-		Piece myPiece = new TestPiece(4, 4);
-		board.get(3).get(3).setPiece(new TestPiece(3, 3));
-		board.get(4).get(4).setPiece(myPiece);
+		//Piece myPiece = new TestPiece(4, 4);
+		//board.get(3).get(3).setPiece(new TestPiece(3, 3));
+		board.get(5).get(5).setPiece(new Rook(5,5,'b'));
+		//board.get(4).get(4).setPiece(myPiece);
 		ActionListener testPieceListener = new ActionListener() {
 
 			@Override
@@ -129,15 +130,14 @@ public class Board extends JFrame {
 					else {
 						removeFocuses();
 						btnClicked.setFocused(true);
-						System.out.println(btnClicked.getPiece());
 						getValidLocations(btnClicked.getPiece());
-						// displayPiecesLocations
 					}
 				}
 			}
 
 		};
-		board.get(3).get(3).addActionListener(testPieceListener);
+		
+		board.get(5).get(5).addActionListener(testPieceListener);
 		board.get(4).get(4).addActionListener(testPieceListener);
 	}
 
@@ -153,10 +153,9 @@ public class Board extends JFrame {
 	public PieceButton getButtonAtLocation(Location loc) {
 		PieceButton btn = null;
 		try {
-			btn = board.get(loc.getRow()).get(loc.getRow());
+			btn = board.get(loc.getRow()).get(loc.getCol());
 		} catch(ArrayIndexOutOfBoundsException e) {
-			System.out
-					.println("Requested location inside of getButtonAtLocation() was null");
+			System.out.println("Requested location inside of getButtonAtLocation() was null");
 		}
 		return btn;
 	}
