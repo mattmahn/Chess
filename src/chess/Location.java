@@ -75,10 +75,10 @@ public class Location {
 		return isEqual;
 	}
 
-	@Override
 	/**
 	 * Returns a String representation of this location in the format "(row,col)".
 	 */
+	@Override
 	public String toString() {
 		return "(" + row + "," + col + ")";
 	}

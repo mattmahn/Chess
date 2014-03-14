@@ -1,19 +1,14 @@
 package chess;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GridLayout;
-//import java.awt.*;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 public class Board extends JFrame {
+
 	private ArrayList<ArrayList<PieceButton>> board = new ArrayList<ArrayList<PieceButton>>();
 	public static final int NORTH = 0;
 	public static final int SOUTH = 180;
@@ -24,7 +19,7 @@ public class Board extends JFrame {
 	 * Creates a 8x8 JFrame filled with empty JButtons.
 	 */
 	public Board() {
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		createBlankBoard();
 		this.setSize(600, 600);
 		this.setLocationRelativeTo(null);
@@ -33,7 +28,7 @@ public class Board extends JFrame {
 
 	/**
 	 * Returns the board in as a ArrayList<ArrayList<JButton>>
-	 * 
+	 *
 	 * @return The list of all JButtons within the board
 	 */
 	public ArrayList<ArrayList<PieceButton>> getBoard() {
@@ -43,18 +38,17 @@ public class Board extends JFrame {
 	/**
 	 * Checks if the passed Button is occupied by a piece by checking if the
 	 * button has an Icon.
-	 * 
-	 * @param location
-	 *            JButton being checked
+	 *
+	 * @param location JButton being checked
 	 * @return True if location has icon.
 	 */
 	public boolean isOccupied(JButton location) {
 		try {
-			if (location.getIcon() != null) {
+			if(location.getIcon() != null) {
 				return true;
 			} else
 				return false;
-		} catch (ArrayIndexOutOfBoundsException e) {
+		} catch(ArrayIndexOutOfBoundsException e) {
 			return false;
 		}
 	}
@@ -62,7 +56,7 @@ public class Board extends JFrame {
 	public void getValidLocations(Piece piece) {
 		List<Location> locs = piece.getMoveLocations();
 		Location pieceLocation = piece.getLocation();
-		for (Location loc : locs) {
+		for(Location loc : locs) {
 			System.out.println(loc);
 			getButtonAtLocation(loc).setBackground(Color.yellow);
 		}
@@ -71,41 +65,38 @@ public class Board extends JFrame {
 
 	/**
 	 * Checks if the piece passed has a move in the requested direction
-	 * 
-	 * @param piece
-	 *            JButton that is moving
-	 * @param direction
-	 *            Direction move will be in
+	 *
+	 * @param piece     JButton that is moving
+	 * @param direction Direction move will be in
 	 */
 	public boolean hasValidMoveInDirection(Piece piece, int direction) {
 		int pieceRow = piece.getRow();
 		int pieceCol = piece.getCol();
-		switch (direction) {
-		case NORTH:
-			if (isOccupied(getButton(pieceRow - 1, pieceCol)))
-				return false;
-			break;
-		case SOUTH:
-			if (isOccupied(getButton(pieceRow + 1, pieceCol)))
-				return false;
-			break;
-		case EAST:
-			if (isOccupied(getButton(pieceRow, pieceCol + 1)))
-				return false;
-			break;
-		case WEST:
-			if (isOccupied(getButton(pieceRow, pieceCol - 1)))
-				return false;
-			break;
+		switch(direction) {
+			case NORTH:
+				if(isOccupied(getButton(pieceRow - 1, pieceCol)))
+					return false;
+				break;
+			case SOUTH:
+				if(isOccupied(getButton(pieceRow + 1, pieceCol)))
+					return false;
+				break;
+			case EAST:
+				if(isOccupied(getButton(pieceRow, pieceCol + 1)))
+					return false;
+				break;
+			case WEST:
+				if(isOccupied(getButton(pieceRow, pieceCol - 1)))
+					return false;
+				break;
 		}
 		return true;
 	}
 
 	/**
 	 * Sets the icon of the peices location to a button on the board
-	 * 
-	 * @param piece
-	 *            Peice that will be placed on the board.
+	 *
+	 * @param piece Peice that will be placed on the board.
 	 */
 	public void placePiece(Piece piece) {
 		board.get(piece.getRow()).get(piece.getCol()).setIcon(piece.getIcon());
@@ -132,8 +123,8 @@ public class Board extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				PieceButton btnClicked = findbtn(event);
-				if (isOccupied(btnClicked)) {
-					if (btnClicked.isFocused())
+				if(isOccupied(btnClicked)) {
+					if(btnClicked.isFocused())
 						btnClicked.setFocused(false);
 					else {
 						removeFocuses();
@@ -151,8 +142,8 @@ public class Board extends JFrame {
 	}
 
 	private void removeFocuses() {
-		for (int row = 0; row < 8; row++) {
-			for (int col = 0; col < 8; col++) {
+		for(int row = 0; row < 8; row++) {
+			for(int col = 0; col < 8; col++) {
 				board.get(row).get(col).setFocused(false);
 			}
 		}
@@ -163,7 +154,7 @@ public class Board extends JFrame {
 		PieceButton btn = null;
 		try {
 			btn = board.get(loc.getRow()).get(loc.getRow());
-		} catch (ArrayIndexOutOfBoundsException e) {
+		} catch(ArrayIndexOutOfBoundsException e) {
 			System.out
 					.println("Requested location inside of getButtonAtLocation() was null");
 		}
@@ -172,9 +163,9 @@ public class Board extends JFrame {
 
 	protected PieceButton findbtn(ActionEvent event) {
 		PieceButton empty = null;
-		for (int row = 0; row < 8; row++) {
-			for (int col = 0; col < 8; col++) {
-				if (board.get(row).get(col).equals(event.getSource()))
+		for(int row = 0; row < 8; row++) {
+			for(int col = 0; col < 8; col++) {
+				if(board.get(row).get(col).equals(event.getSource()))
 					return board.get(row).get(col);
 			}
 		}
@@ -184,8 +175,8 @@ public class Board extends JFrame {
 	private void addBtnsToBoard() {
 		JPanel mainContent = new JPanel();
 		mainContent.setLayout(new GridLayout(8, 8));
-		for (ArrayList<PieceButton> row : board) {
-			for (int col = 0; col < row.size(); col++) {
+		for(ArrayList<PieceButton> row : board) {
+			for(int col = 0; col < row.size(); col++) {
 				mainContent.add(row.get(col));
 			}
 		}
@@ -194,9 +185,9 @@ public class Board extends JFrame {
 
 	private void initBtns() {
 		// TODO Auto-generated method stub
-		for (int row = 0; row < 8; row++) {
+		for(int row = 0; row < 8; row++) {
 			board.add(new ArrayList<PieceButton>());
-			for (int col = 0; col < 8; col++) {
+			for(int col = 0; col < 8; col++) {
 				board.get(row).add(new PieceButton());
 			}
 		}
