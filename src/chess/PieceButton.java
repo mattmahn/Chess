@@ -23,10 +23,6 @@ public class PieceButton extends JButton {
 
 	public void setFocused(boolean b) {
 		this.focused = b;
-		if(b)
-			System.out.println("THE BUTTON YOU PRESSED IS NOW IN FOCUS"
-					+ "\nTHE BOARD SHOULD NOW DISPLAY VALID MOVE LOCATIONS IN YELLOW");
-		else System.out.println("NO LONGER IN FOCUS");
 	}
 
 	public boolean isFocused() {
