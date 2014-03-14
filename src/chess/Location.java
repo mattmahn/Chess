@@ -28,7 +28,7 @@ public class Location {
 	}
 
 	/**
-	 * Returns the adjacent location towards {@code direction}.
+	 * Returns the adjacent location towards {@code direction}. If an invalid direction was passed, null is returned.
 	 *
 	 * @param direction the direction to look towards
 	 * @return the adjacent location towards {@code direction}
@@ -73,5 +73,13 @@ public class Location {
 		}
 
 		return isEqual;
+	}
+
+	@Override
+	/**
+	 * Returns a String representation of this location in the format "(row,col)".
+	 */
+	public String toString() {
+		return "(" + row + "," + col + ")";
 	}
 }
