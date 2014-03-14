@@ -1,19 +1,26 @@
 package chess;
 
-import javax.swing.ImageIcon;
+import javax.swing.*;
 
 public abstract class Piece {
 
-	private int row,col;
-	public Piece(int row, int col){
-		this.row = row;
-		this.col=col;
+	private Location location;
+
+	public Piece(int row, int col) {
+		this.location = new Location(row, col);
 	}
-	public int getRow(){
-		return row;
+
+	public Location getLocation() {
+		return location;
 	}
-	public int getCol(){
-		return col;
+
+	public int getRow() {
+		return location.getRow();
 	}
+
+	public int getCol() {
+		return location.getCol();
+	}
+
 	public abstract ImageIcon getIcon();
 }
