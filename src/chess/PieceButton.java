@@ -3,7 +3,8 @@ package chess;
 import javax.swing.JButton;
 
 public class PieceButton extends JButton {
-	Piece housedPiece;
+	private Piece housedPiece;
+	private boolean focused;
 	public PieceButton(){
 		super();
 	}
@@ -14,5 +15,15 @@ public class PieceButton extends JButton {
 	}
 	public Piece getPiece(){
 		return housedPiece;
+	}
+	public void setFocused(boolean b){
+		this.focused = b;
+		if(b)
+			System.out.println("THE BUTTON YOU PRESSED IS NOW IN FOCUS" 
+				+"\nTHE BOARD SHOULD NOW DISPLAY VALID MOVE LOCATIONS IN YELLOW");
+		else System.out.println("NO LONGER IN FOCUS");
+	}
+	public boolean isFocused(){
+		return focused;
 	}
 }
