@@ -1,13 +1,12 @@
 package chess;
 
-import java.util.List;
-
 import javax.swing.*;
+import java.util.List;
 
 public abstract class Piece {
 
-	private Location location;
-	
+	protected Location location;
+
 	public Piece(int row, int col) {
 		this.location = new Location(row, col);
 	}
