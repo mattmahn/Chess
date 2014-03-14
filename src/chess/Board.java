@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class Board extends JFrame {
-	private ArrayList<ArrayList<PieceButton>> board = new ArrayList<ArrayList<PieceButton>>();;
+	private ArrayList<ArrayList<PieceButton>> board = new ArrayList<ArrayList<PieceButton>>();
 	public static final int NORTH = 0;
 	public static final int SOUTH = 180;
 	public static final int EAST = 90;
@@ -62,7 +62,6 @@ public class Board extends JFrame {
 	 *            Direction move will be in
 	 */
 	public boolean hasValidMoveInDirection(Piece piece, int direction) {
-		// NEED PIECE CLASS MUST CONTAIN .getRow() and .getCol()
 		int pieceRow = piece.getRow();
 		int pieceCol = piece.getCol();
 		switch (direction) {
@@ -81,6 +80,7 @@ public class Board extends JFrame {
 		case WEST:
 			if (isOccupied(getButton(pieceRow, pieceCol - 1)))
 				return false;
+			break;
 		}
 		return true;
 	}
@@ -110,6 +110,7 @@ public class Board extends JFrame {
 	private void placeNewSetOfPeices() {
 		Piece myPiece = new TestPiece(4, 4);
 		board.get(4).get(4).setIcon(myPiece.getIcon());
+		System.out.println(myPiece.getLocation().getAdjacentLocation(Location.NORTH));
 		board.get(4).get(4).addActionListener(new ActionListener() {
 
 			@Override
@@ -117,14 +118,24 @@ public class Board extends JFrame {
 				// TODO Auto-generated method stub
 				PieceButton btnClicked = findbtn(event);
 				if(isOccupied(btnClicked)){
-					btnClicked.setEnabled(false);
-					//btnClicked.getPiece().getAvaliableMoveLocations();
+					if(btnClicked.isFocused())
+						btnClicked.setFocused(false);
+					else
+						btnClicked.setFocused(true);
 				}
 			}
 
 		});
 	}
-
+	public PieceButton getButtonAtLocation(Location loc){
+		PieceButton btn = null;
+		try{
+			btn = board.get(loc.getRow()).get(loc.getRow());
+		}catch(ArrayIndexOutOfBoundsException e){
+			
+		}
+		return btn;
+	}
 	protected PieceButton findbtn(ActionEvent event) {
 		PieceButton empty = null;
 		for (int row = 0; row < 8; row++) {
