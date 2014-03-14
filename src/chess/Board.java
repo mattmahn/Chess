@@ -1,11 +1,17 @@
 package chess;
 
-import javax.swing.*;
-
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GridLayout;
+//import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class Board extends JFrame {
 	private ArrayList<ArrayList<PieceButton>> board = new ArrayList<ArrayList<PieceButton>>();
@@ -51,6 +57,16 @@ public class Board extends JFrame {
 		} catch (ArrayIndexOutOfBoundsException e) {
 			return false;
 		}
+	}
+
+	public void getValidLocations(Piece piece) {
+		List<Location> locs = piece.getMoveLocations();
+		Location pieceLocation = piece.getLocation();
+		for (Location loc : locs) {
+			System.out.println(loc);
+			getButtonAtLocation(loc).setBackground(Color.yellow);
+		}
+
 	}
 
 	/**
@@ -109,38 +125,56 @@ public class Board extends JFrame {
 	// TODO create all different types of pieces and set their locations.
 	private void placeNewSetOfPeices() {
 		Piece myPiece = new TestPiece(4, 4);
-		board.get(4).get(4).setIcon(myPiece.getIcon());
-		System.out.println(myPiece.getLocation().getAdjacentLocation(Location.NORTH));
-		board.get(4).get(4).addActionListener(new ActionListener() {
+		board.get(3).get(3).setPiece(new TestPiece(3, 3));
+		board.get(4).get(4).setPiece(myPiece);
+		ActionListener testPieceListener = new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				// TODO Auto-generated method stub
 				PieceButton btnClicked = findbtn(event);
-				if(isOccupied(btnClicked)){
-					if(btnClicked.isFocused())
+				if (isOccupied(btnClicked)) {
+					if (btnClicked.isFocused())
 						btnClicked.setFocused(false);
-					else
+					else {
+						removeFocuses();
 						btnClicked.setFocused(true);
+						System.out.println(btnClicked.getPiece());
+						getValidLocations(btnClicked.getPiece());
+						// displayPiecesLocations
+					}
 				}
 			}
 
-		});
+		};
+		board.get(3).get(3).addActionListener(testPieceListener);
+		board.get(4).get(4).addActionListener(testPieceListener);
 	}
-	public PieceButton getButtonAtLocation(Location loc){
+
+	private void removeFocuses() {
+		for (int row = 0; row < 8; row++) {
+			for (int col = 0; col < 8; col++) {
+				board.get(row).get(col).setFocused(false);
+			}
+		}
+
+	}
+
+	public PieceButton getButtonAtLocation(Location loc) {
 		PieceButton btn = null;
-		try{
+		try {
 			btn = board.get(loc.getRow()).get(loc.getRow());
-		}catch(ArrayIndexOutOfBoundsException e){
-			
+		} catch (ArrayIndexOutOfBoundsException e) {
+			System.out
+					.println("Requested location inside of getButtonAtLocation() was null");
 		}
 		return btn;
 	}
+
 	protected PieceButton findbtn(ActionEvent event) {
 		PieceButton empty = null;
 		for (int row = 0; row < 8; row++) {
 			for (int col = 0; col < 8; col++) {
-				if(board.get(row).get(col).equals(event.getSource()))
+				if (board.get(row).get(col).equals(event.getSource()))
 					return board.get(row).get(col);
 			}
 		}

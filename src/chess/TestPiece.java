@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
 
 public class TestPiece extends Piece {
 
-	private ImageIcon pieceIcon = new ImageIcon("knight.png");
+	private ImageIcon pieceIcon = new ImageIcon("knight_black.png");
 	
 	public TestPiece(int row, int col) {
 		super(row, col);
@@ -21,6 +21,10 @@ public class TestPiece extends Piece {
 		List<Location> b = new ArrayList<Location>();
 		b.add(new Location(0,0));
 		return b;
+	}
+	@Override
+	public String toString() {
+		return "TestPiece [pieceIcon=" + pieceIcon + "]";
 	}
 
 }
