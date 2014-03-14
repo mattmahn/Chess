@@ -70,7 +70,7 @@ public class Rook extends Piece {
 			moveLocs.add(new Location(j, col));
 		}
 		//get locations West
-		for(int i = col - 1; i >= 0; i++) {
+		for(int i = col - 1; i >= 0; i--) {
 			moveLocs.add(new Location(row, i));
 		}
 
