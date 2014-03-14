@@ -12,6 +12,7 @@ public abstract class Piece {
 
 	/**
 	 * Creates a generic piece at a given row and column.
+	 *
 	 * @param row the row of this piece on the board
 	 * @param col the column of this piece on the board
 	 */
@@ -21,6 +22,7 @@ public abstract class Piece {
 
 	/**
 	 * Returns the Location of this piece.
+	 *
 	 * @return the Location of this piece
 	 */
 	public Location getLocation() {
@@ -29,6 +31,7 @@ public abstract class Piece {
 
 	/**
 	 * Returns the row this piece is in.
+	 *
 	 * @return the row this piece is in
 	 */
 	public int getRow() {
@@ -37,6 +40,7 @@ public abstract class Piece {
 
 	/**
 	 * Returns the column this piece is in.
+	 *
 	 * @return the column this piece is in
 	 */
 	public int getCol() {
@@ -61,6 +65,7 @@ public abstract class Piece {
 
 	/**
 	 * Returns all possible move locations of this piece.
+	 *
 	 * @return all possible move location of this piece
 	 */
 	public abstract List<List<Location>> getMoveLocations();
