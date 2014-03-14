@@ -63,5 +63,5 @@ public abstract class Piece {
 	 * Returns all possible move locations of this piece.
 	 * @return all possible move location of this piece
 	 */
-	public abstract List<Location> getMoveLocations();
+	public abstract List<List<Location>> getMoveLocations();
 }

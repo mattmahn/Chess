@@ -52,27 +52,36 @@ public class Rook extends Piece {
 	 * @return a list of move locations
 	 */
 	@Override
-	public List<Location> getMoveLocations() {
+	public List<List<Location>> getMoveLocations() {
 		int row = location.getRow();
 		int col = location.getCol();
-		List<Location> moveLocs = new ArrayList<Location>();
+		List<List<Location>> moveLocs = new ArrayList<List<Location>>();
 
 		// get locations North
+		List<Location> north = new ArrayList<Location>();
 		for(int j = row - 1; j >= 0; j--) {
-			moveLocs.add(new Location(j, col));
+			north.add(new Location(j, col));
 		}
 		// get locations East
+		List<Location> east = new ArrayList<Location>();
 		for(int i = col + 1; i < 8; i++) {
-			moveLocs.add(new Location(row, i));
+			east.add(new Location(row, i));
 		}
 		// get locations South
+		List<Location> south = new ArrayList<Location>();
 		for(int j = row + 1; j < 8; j++) {
-			moveLocs.add(new Location(j, col));
+			south.add(new Location(j, col));
 		}
 		//get locations West
+		List<Location> west = new ArrayList<Location>();
 		for(int i = col - 1; i >= 0; i--) {
-			moveLocs.add(new Location(row, i));
+			west.add(new Location(row, i));
 		}
+
+		moveLocs.add(north);
+		moveLocs.add(east);
+		moveLocs.add(south);
+		moveLocs.add(west);
 
 		return moveLocs;
 	}
