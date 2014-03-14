@@ -1,11 +1,13 @@
 package chess;
 
+import java.util.List;
+
 import javax.swing.*;
 
 public abstract class Piece {
 
 	private Location location;
-
+	
 	public Piece(int row, int col) {
 		this.location = new Location(row, col);
 	}
@@ -23,4 +25,5 @@ public abstract class Piece {
 	}
 
 	public abstract ImageIcon getIcon();
+	public abstract List<Location> getMoveLocations();
 }
