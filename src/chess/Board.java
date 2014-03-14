@@ -9,10 +9,10 @@ import java.util.ArrayList;
 
 public class Board extends JFrame {
 	private ArrayList<ArrayList<PieceButton>> board = new ArrayList<ArrayList<PieceButton>>();;
-	public static final int NORTH = 90;
-	public static final int SOUTH = 270;
-	public static final int EAST = 0;
-	public static final int WEST = 180;
+	public static final int NORTH = 0;
+	public static final int SOUTH = 180;
+	public static final int EAST = 90;
+	public static final int WEST = 270;
 
 	/**
 	 * Creates a 8x8 JFrame filled with empty JButtons.
