@@ -69,4 +69,14 @@ public abstract class Piece {
 	 * @return all possible move location of this piece
 	 */
 	public abstract List<List<Location>> getMoveLocations();
+
+	/**
+	 * Returns a string representation of this piece.
+	 *
+	 * @return a string representation of this piece
+	 */
+	@Override
+	public String toString() {
+		return this.getClass().getSimpleName() + " (" + getIcon().toString() + ") at location " + location.toString();
+	}
 }
