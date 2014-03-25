@@ -40,7 +40,6 @@ public class Rook extends Piece {
 		return team;
 	}
 
-
 	@Override
 	public ImageIcon getIcon() {
 		return icon;
