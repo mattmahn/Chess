@@ -14,24 +14,41 @@ public class Location {
 	private int row;
 	private int col;
 
+	/**
+	 * Constructs a Location object with the desired row and column.
+	 *
+	 * @param row desired row
+	 * @param col desired column
+	 */
 	public Location(int row, int col) {
 		this.row = row;
 		this.col = col;
 	}
 
+	/**
+	 * Returns the row of this Location.
+	 *
+	 * @return the row of this location
+	 */
 	public int getRow() {
 		return row;
 	}
 
+	/**
+	 * Returns the column of this location.
+	 *
+	 * @return the column of this location
+	 */
 	public int getCol() {
 		return col;
 	}
 
 	/**
 	 * Returns the adjacent location towards {@code direction}. If an invalid direction was passed, null is returned.
+	 * This method does not guaranty the returned Location is bounded in a standard chess board.
 	 *
 	 * @param direction the direction to look towards
-	 * @return the adjacent location towards {@code direction}
+	 * @return the adjacent location towards {@code direction}; null if invalid direction was passed
 	 */
 	public Location getAdjacentLocation(int direction) {
 		Location adjacentLoc = null;
@@ -65,6 +82,12 @@ public class Location {
 		return adjacentLoc;
 	}
 
+	/**
+	 * Returns whether or not the target represents the same row and column as this Location.
+	 *
+	 * @param target the target Location
+	 * @return whether or not the target represents the same row and column as this Location
+	 */
 	public boolean equals(Object target) {
 		boolean isEqual = false;
 		if(target instanceof Location) {
@@ -77,6 +100,8 @@ public class Location {
 
 	/**
 	 * Returns a String representation of this location in the format "(row,col)".
+	 *
+	 * @return a String representation of this location in the format "(row,col)".
 	 */
 	@Override
 	public String toString() {
