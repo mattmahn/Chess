@@ -19,7 +19,6 @@ public class Board extends JFrame {
 	 */
 	private ArrayList<ArrayList<PieceButton>> board = new ArrayList<ArrayList<PieceButton>>();
 
-
 	/**
 	 * Creates a 8x8 JFrame filled with empty PieceButtons.
 	 */
@@ -58,22 +57,27 @@ public class Board extends JFrame {
 			return false;
 		}
 	}
+
 	/**
 	 * Highlights the avaliable locations for the peice to move to
+	 * 
 	 * @param piece
 	 */
 	public void getValidLocations(Piece piece) {
-		List<Location> locs = piece.getMoveLocations();
+		List<List<Location>> locs = piece.getMoveLocations();
 		Location pieceLocation = piece.getLocation();
-		for (Location loc : locs) {
-			PieceButton btnToHighlight = getButtonAtLocation(loc);
-			if (!(isOccupied(btnToHighlight))) {
-				btnToHighlight.setBackground(Color.yellow);
+		for (List<Location> loc : locs) {
+			for(int i = 0; i <loc.size();i++){
+				Location currentLocation = loc.get(i);
+				if(!isOccupied(getButtonAtLocation(currentLocation)))
+					getButtonAtLocation(currentLocation).setFocused(true);
+				else
+					break;
 			}
 		}
+		
 
 	}
-
 
 	/**
 	 * Places the peice into a button that corresponds with the peices location.
@@ -84,11 +88,11 @@ public class Board extends JFrame {
 	public void placePiece(Piece piece) {
 		board.get(piece.getRow()).get(piece.getCol()).setIcon(piece.getIcon());
 	}
+
 	/**
-	 * Creates a board that is ready for gameplay.
-	 * <br>
-	 * This board has all pieces set in their appropriate starting positions and awaits for the
-	 * user to make the first move. 
+	 * Creates a board that is ready for gameplay. <br>
+	 * This board has all pieces set in their appropriate starting positions and
+	 * awaits for the user to make the first move.
 	 */
 	private void createBlankBoard() {
 		// TODO Auto-generated method stub
@@ -125,8 +129,10 @@ public class Board extends JFrame {
 		board.get(3).get(5).addActionListener(testPieceListener);
 		board.get(5).get(5).addActionListener(testPieceListener);
 	}
+
 	/**
-	 * Removes the highlighting and the focus attribute of all buttons are set to false
+	 * Removes the highlighting and the focus attribute of all buttons are set
+	 * to false
 	 */
 	private void removeFocuses() {
 		for (int row = 0; row < 8; row++) {
@@ -137,9 +143,12 @@ public class Board extends JFrame {
 		}
 
 	}
+
 	/**
 	 * Gets the button a the given location
-	 * @param loc The location to pull the button from
+	 * 
+	 * @param loc
+	 *            The location to pull the button from
 	 * @return PieceButton in the location requested
 	 */
 	public PieceButton getButtonAtLocation(Location loc) {
@@ -152,10 +161,13 @@ public class Board extends JFrame {
 		}
 		return btn;
 	}
+
 	/**
 	 * Finds the button based on the event passed in
-	 * @param event ActionEvent that was triggered by a user clicking on a button
-	 * @return PieceButton that caused the event. 
+	 * 
+	 * @param event
+	 *            ActionEvent that was triggered by a user clicking on a button
+	 * @return PieceButton that caused the event.
 	 */
 	protected PieceButton findbtn(ActionEvent event) {
 		PieceButton empty = null;
@@ -167,9 +179,9 @@ public class Board extends JFrame {
 		}
 		return empty;
 	}
+
 	/**
-	 * Adds empty PieceButtons to the board.
-	 * <br>
+	 * Adds empty PieceButtons to the board. <br>
 	 */
 	private void addBtnsToBoard() {
 		JPanel mainContent = new JPanel();
@@ -181,6 +193,7 @@ public class Board extends JFrame {
 		}
 		this.add(mainContent, BorderLayout.CENTER);
 	}
+
 	/**
 	 * Creates a new board
 	 */

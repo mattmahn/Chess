@@ -1,5 +1,7 @@
 package chess;
 
+import java.awt.Color;
+
 import javax.swing.*;
 
 public class PieceButton extends JButton {
@@ -23,6 +25,11 @@ public class PieceButton extends JButton {
 
 	public void setFocused(boolean b) {
 		this.focused = b;
+		if(b)
+			this.setBackground(Color.yellow);
+		else
+			this.setBackground(null);
+		
 	}
 
 	public boolean isFocused() {
