@@ -34,7 +34,7 @@ public class Rook extends Piece {
 	}
 
 	/**
-	 * Returns the team of the piece
+	 * Returns the team of the piece.
 	 *
 	 * @return the team of the piece
 	 */
@@ -54,9 +54,9 @@ public class Rook extends Piece {
 	 */
 	@Override
 	public List<List<Location>> getMoveLocations() {
-		int row = location.getRow();
-		int col = location.getCol();
-		List<List<Location>> moveLocs = new ArrayList<List<Location>>();
+		int row = getRow();
+		int col = getCol();
+		List<List<Location>> moveLocs = new ArrayList<>();
 
 		// get locations North
 		List<Location> north = new ArrayList<Location>();
