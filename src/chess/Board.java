@@ -21,6 +21,7 @@ public class Board extends JFrame {
 	 * The PieceButtons that are placed onto the board.
 	 */
 	private ArrayList<ArrayList<PieceButton>> board = new ArrayList<ArrayList<PieceButton>>();
+	private PieceButton btnToMovePieceFrom = null;
 
 	/**
 	 * Creates a 8x8 JFrame filled with empty PieceButtons.
@@ -83,10 +84,10 @@ public class Board extends JFrame {
 	}
 
 	/**
-	 * Places the peice into a button that corresponds with the peices location.
+	 * Places the piece into a button that corresponds with the pieces location.
 	 * 
 	 * @param piece
-	 *            Peice that will be placed on the board.
+	 *            Piece that will be placed on the board.
 	 */
 	public void placePiece(Piece piece) {
 		board.get(piece.getRow()).get(piece.getCol()).setIcon(piece.getIcon());
@@ -110,27 +111,41 @@ public class Board extends JFrame {
 		// board.get(3).get(3).setPiece(new TestPiece(3, 3));
 		board.get(5).get(5).setPiece(new Rook(5, 5, 'b'));
 		board.get(3).get(5).setPiece(new Rook(3, 5, 'b'));
-		ActionListener testPieceListener = new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent event) {
-				PieceButton btnClicked = findbtn(event);
-				if (isOccupied(btnClicked)) {
-					if (btnClicked.isFocused()) {
-						btnClicked.setFocused(false);
-						removeFocuses();
-					} else {
-						removeFocuses();
-						btnClicked.setFocused(true);
-						getValidLocations(btnClicked.getPiece());
-					}
-				}
-			}
-
-		};
-
-		board.get(3).get(5).addActionListener(testPieceListener);
-		board.get(5).get(5).addActionListener(testPieceListener);
+		board.get(4).get(3).setPiece(new Rook(4, 3, 'w'));
+//		ActionListener testPieceListener = new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent event) {
+//				PieceButton btnClicked = findbtn(event);
+//				if (isOccupied(btnClicked)) {
+//					if (btnClicked.isFocused()) {
+//						btnClicked.setFocused(false);
+//						removeFocuses();
+//					} else {
+//						removeFocuses();
+//						btnClicked.setFocused(true);
+//						getValidLocations(btnClicked.getPiece());
+//					}
+//				}
+//			}
+//
+//		};
+//		ActionListener testMoveListener = new ActionListener(){
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				// TODO Auto-generated method stub
+//				PieceButton btnToMoveTo = findbtn(e);
+//				if(btnToMoveTo.isFocused()){
+//					btnToMoveTo.setBackground(Color.red);
+//					removeFocuses();
+//				}
+//			}
+//			
+//		};
+//		board.get(3).get(5).addActionListener(testPieceListener);
+//		board.get(5).get(5).addActionListener(testPieceListener);
+//		board.get(4).get(3).addActionListener(testPieceListener);
 	}
 
 	/**
@@ -201,12 +216,65 @@ public class Board extends JFrame {
 	 * Creates a new board
 	 */
 	private void initBtns() {
-		// TODO Auto-generated method stub
+		ActionListener testPieceListener = new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				PieceButton btnClicked = findbtn(event);
+				if (isOccupied(btnClicked)) {
+					if (btnClicked.isFocused()) {
+						btnClicked.setFocused(false);
+						btnToMovePieceFrom = null;
+						removeFocuses();
+					} else {
+						removeFocuses();
+						btnToMovePieceFrom = btnClicked;
+						btnClicked.setFocused(true);
+						getValidLocations(btnClicked.getPiece());
+					}
+				}
+			}
+
+		};
+		ActionListener testMoveListener = new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				PieceButton btnToMoveTo = findbtn(e);
+				if(btnToMoveTo.isFocused() && !isOccupied(btnToMoveTo)){
+					movePieceToBtn(btnToMoveTo);
+				}
+			}
+			
+		};
 		for (int row = 0; row < 8; row++) {
 			board.add(new ArrayList<PieceButton>());
 			for (int col = 0; col < 8; col++) {
 				board.get(row).add(new PieceButton());
+				board.get(row).get(col).addActionListener(testPieceListener);
+				board.get(row).get(col).addActionListener(testMoveListener);
 			}
+		}
+	}
+
+	private Location findLocationOfButton(PieceButton btn){
+		for (int row = 0; row < 8; row++) {
+			for (int col = 0; col < 8; col++) {
+				PieceButton current = board.get(row).get(col);
+				if(current.equals(btn))
+					return new Location(row,col);
+			}
+		}
+		return null;
+	}
+	protected void movePieceToBtn(PieceButton btnToMoveTo) {
+		if(btnToMovePieceFrom != null){
+			Piece pieceToMove = btnToMovePieceFrom.getPiece();
+			btnToMovePieceFrom.setPiece(null);
+			btnToMoveTo.setPiece(pieceToMove);
+			Location locOfBtnToMoveTo = findLocationOfButton(btnToMoveTo);
+			pieceToMove.setLocation(new Location(locOfBtnToMoveTo.getRow(),locOfBtnToMoveTo.getCol()));
 		}
 	}
 

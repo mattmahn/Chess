@@ -16,8 +16,13 @@ public class PieceButton extends JButton {
 
 	public void setPiece(Piece p) {
 		housedPiece = p;
-		this.setIcon(p.getIcon());
-		this.setDisabledIcon(p.getIcon());
+		if (p == null) {
+			this.setIcon(null);
+			this.setDisabledIcon(null);
+		} else {
+			this.setIcon(p.getIcon());
+			this.setDisabledIcon(p.getIcon());
+		}
 	}
 
 	public Piece getPiece() {
@@ -26,11 +31,11 @@ public class PieceButton extends JButton {
 
 	public void setFocused(boolean b) {
 		this.focused = b;
-		if(b)
+		if (b)
 			this.setBackground(Color.yellow);
 		else
 			this.setBackground(null);
-		
+
 	}
 
 	public boolean isFocused() {
