@@ -1,5 +1,8 @@
 package chess;
 
+import chess.pieces.Piece;
+import chess.pieces.Rook;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

@@ -1,8 +1,9 @@
 package chess;
 
-import java.awt.Color;
+import chess.pieces.Piece;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class PieceButton extends JButton {
 

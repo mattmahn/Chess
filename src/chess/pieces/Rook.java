@@ -1,4 +1,6 @@
-package chess;
+package chess.pieces;
+
+import chess.Location;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -21,10 +23,10 @@ public class Rook extends Piece {
 		this.team = team;
 		switch(team) {
 			case 'b':
-				icon = new ImageIcon("rook_black.png");
+				icon = new ImageIcon("images/rook_black.png");
 				break;
 			case 'w':
-				icon = new ImageIcon("rook_white.png");
+				icon = new ImageIcon("images/rook_white.png");
 				break;
 			default:
 				throw new IllegalArgumentException("Team must be 'b' for black team or 'w' for white team.");
