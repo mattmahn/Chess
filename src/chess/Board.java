@@ -72,19 +72,29 @@ public class Board extends JFrame {
 	public void getValidLocations(Piece piece) {
 		List<List<Location>> locs = piece.getMoveLocations();
 		for (List<Location> loc : locs) {
-			for(int i = 0; i <loc.size();i++){
+			for (int i = 0; i < loc.size(); i++) {
 				Location currentLocation = loc.get(i);
-				if(!isOccupied(getButtonAtLocation(currentLocation)))
-					getButtonAtLocation(currentLocation).setFocused(true);
-				else{
-					if(CL.potentialKill(piece,currentLocation))
+				if (isValidLocationOnGird(currentLocation)) {
+					if (!isOccupied(getButtonAtLocation(currentLocation)))
 						getButtonAtLocation(currentLocation).setFocused(true);
-					break;
+					else {
+						if (CL.potentialKill(piece, currentLocation))
+							getButtonAtLocation(currentLocation).setFocused(
+									true);
+						break;
+					}
 				}
 			}
 		}
-		
 
+	}
+
+	private boolean isValidLocationOnGird(Location currentLocation) {
+		int col = currentLocation.getCol();
+		int row = currentLocation.getRow();
+		if(col>7 || row>7 || col<0 || row<0)
+			return false;
+		return true;
 	}
 
 	/**
@@ -193,21 +203,21 @@ public class Board extends JFrame {
 						getValidLocations(btnClicked.getPiece());
 					}
 				}
-					
+
 			}
 
 		};
-		ActionListener testMoveListener = new ActionListener(){
+		ActionListener testMoveListener = new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				PieceButton btnToMoveTo = findbtn(e);
-				if(btnToMoveTo.isFocused()){
+				if (btnToMoveTo.isFocused()) {
 					movePieceToBtn(btnToMoveTo);
 				}
 			}
-			
+
 		};
 		for (int row = 0; row < 8; row++) {
 			board.add(new ArrayList<PieceButton>());
@@ -220,27 +230,29 @@ public class Board extends JFrame {
 	}
 
 	protected void overTakePiece(PieceButton btnToMoveTo) {
-		
+
 	}
 
-	private Location findLocationOfButton(PieceButton btn){
+	private Location findLocationOfButton(PieceButton btn) {
 		for (int row = 0; row < 8; row++) {
 			for (int col = 0; col < 8; col++) {
 				PieceButton current = board.get(row).get(col);
-				if(current.equals(btn))
-					return new Location(row,col);
+				if (current.equals(btn))
+					return new Location(row, col);
 			}
 		}
 		return null;
 	}
+
 	protected void movePieceToBtn(PieceButton btnToMoveTo) {
-		if(btnToMovePieceFrom != null){
+		if (btnToMovePieceFrom != null) {
 			Piece pieceToMove = btnToMovePieceFrom.getPiece();
 			btnToMovePieceFrom.setPiece(null);
 			Piece pieceRemoved = btnToMoveTo.setPiece(pieceToMove);
 			CL.removePiece(pieceRemoved);
 			Location locOfBtnToMoveTo = findLocationOfButton(btnToMoveTo);
-			pieceToMove.setLocation(new Location(locOfBtnToMoveTo.getRow(),locOfBtnToMoveTo.getCol()));
+			pieceToMove.setLocation(new Location(locOfBtnToMoveTo.getRow(),
+					locOfBtnToMoveTo.getCol()));
 			CL.updateLogic();
 		}
 	}

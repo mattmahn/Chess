@@ -2,7 +2,7 @@ package chess;
 
 import java.util.ArrayList;
 
-import chess.pieces.Piece;
+import chess.pieces.*;
 import chess.pieces.Rook;
 
 public class ChessLogic {
@@ -31,10 +31,12 @@ public class ChessLogic {
 		WhitePieces = new ArrayList<Piece>();
 		// For now only adding rooks
 		for (int i = 0; i < 8; i++)
-			BlackPieces.add(new Rook(0, i, 'b'));
+			BlackPieces.add(new Rook(1, i, 'b'));
+		BlackPieces.add(new King(0,4,'b'));
 		for (int i = 0; i < 8; i++)
-			WhitePieces.add(new Rook(7, i, 'w'));
-		// Disable Blacks Peices because of new game
+			WhitePieces.add(new Rook(6, i, 'w'));
+		WhitePieces.add(new King(7,3,'w'));
+		// Disable Blacks Pieces because of new game
 		// enablePeices(BlackPieces, false);
 	}
 
