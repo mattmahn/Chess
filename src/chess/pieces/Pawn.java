@@ -47,26 +47,26 @@ public class Pawn extends Piece {
     */
    @Override
    public List<List<Location>> getMoveLocations() {
-      int row = getRow();
-      int col = getCol();
       List<List<Location>> moveLocs = new ArrayList<List<Location>>();
 
-      List<Location> vertical = new ArrayList<>();
+      List<Location> vertical = new ArrayList<>(), diagLeft = new ArrayList<>(), diagRight = new ArrayList<>();
       if(team == 'w') {
          vertical.add(location.getAdjacentLocation(Location.NORTH));
          if(isFirstMove)
             vertical.add(location.getAdjacentLocation(Location.NORTH).getAdjacentLocation(Location.NORTH));
+         diagLeft.add(location.getAdjacentLocation(Location.NORTH_WEST));
+         diagRight.add(location.getAdjacentLocation(Location.NORTH_EAST));
       } else {
          vertical.add(location.getAdjacentLocation(Location.SOUTH));
          if(isFirstMove)
             vertical.add(location.getAdjacentLocation(Location.SOUTH).getAdjacentLocation(Location.SOUTH));
+         diagLeft.add(location.getAdjacentLocation(Location.SOUTH_WEST));
+         diagRight.add(location.getAdjacentLocation(Location.SOUTH_EAST));
       }
 
-      // TODO diagonal capture
-      List<Location> diagLeft = new ArrayList<>();
-      // TODO Pawn needs access to what pieces are where on the game board to decide if it can move diagonally
-
       moveLocs.add(vertical);
+      moveLocs.add(diagLeft);
+      moveLocs.add(diagRight);
 
       return moveLocs;
    }
