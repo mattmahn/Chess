@@ -76,8 +76,11 @@ public class Board extends JFrame {
 				Location currentLocation = loc.get(i);
 				if(!isOccupied(getButtonAtLocation(currentLocation)))
 					getButtonAtLocation(currentLocation).setFocused(true);
-				else
+				else{
+					if(CL.potentialKill(piece,currentLocation))
+						getButtonAtLocation(currentLocation).setFocused(true);
 					break;
+				}
 			}
 		}
 		
@@ -190,6 +193,7 @@ public class Board extends JFrame {
 						getValidLocations(btnClicked.getPiece());
 					}
 				}
+					
 			}
 
 		};
@@ -199,7 +203,7 @@ public class Board extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				PieceButton btnToMoveTo = findbtn(e);
-				if(btnToMoveTo.isFocused() && !isOccupied(btnToMoveTo)){
+				if(btnToMoveTo.isFocused()){
 					movePieceToBtn(btnToMoveTo);
 				}
 			}
@@ -213,6 +217,10 @@ public class Board extends JFrame {
 				board.get(row).get(col).addActionListener(testMoveListener);
 			}
 		}
+	}
+
+	protected void overTakePiece(PieceButton btnToMoveTo) {
+		
 	}
 
 	private Location findLocationOfButton(PieceButton btn){
@@ -229,7 +237,8 @@ public class Board extends JFrame {
 		if(btnToMovePieceFrom != null){
 			Piece pieceToMove = btnToMovePieceFrom.getPiece();
 			btnToMovePieceFrom.setPiece(null);
-			btnToMoveTo.setPiece(pieceToMove);
+			Piece pieceRemoved = btnToMoveTo.setPiece(pieceToMove);
+			CL.removePiece(pieceRemoved);
 			Location locOfBtnToMoveTo = findLocationOfButton(btnToMoveTo);
 			pieceToMove.setLocation(new Location(locOfBtnToMoveTo.getRow(),locOfBtnToMoveTo.getCol()));
 			CL.updateLogic();

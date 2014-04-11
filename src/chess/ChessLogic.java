@@ -34,32 +34,74 @@ public class ChessLogic {
 			BlackPieces.add(new Rook(0, i, 'b'));
 		for (int i = 0; i < 8; i++)
 			WhitePieces.add(new Rook(7, i, 'w'));
-		//Disable Blacks Peices because of new game
-		enablePeices(BlackPieces,false);
+		// Disable Blacks Peices because of new game
+		// enablePeices(BlackPieces, false);
 	}
 
 	public void updateLogic() {
 		// First change turn to opposite color
-		if (isWhitesTurn) {
-			enablePeices(WhitePieces,false);
-			enablePeices(BlackPieces,true);
-			isWhitesTurn = false;
-			
-		} 
-		else {
-			enablePeices(BlackPieces,false);
-			enablePeices(WhitePieces,true);
-			isWhitesTurn = true;
-		}
+		// if (isWhitesTurn) {
+		// enablePeices(WhitePieces,false);
+		// enablePeices(BlackPieces,true);
+		// isWhitesTurn = false;
+		//
+		// }
+		// else {
+		// enablePeices(BlackPieces,false);
+		// enablePeices(WhitePieces,true);
+		// isWhitesTurn = true;
+		// }
+		// Check for win
+		checkWin();
+
 	}
 
-	private void enablePeices(ArrayList<Piece> Pieces,boolean enable) {
+	private void checkWin() {
+
+	}
+
+	private void enablePeices(ArrayList<Piece> Pieces, boolean enable) {
 		for (Piece piece : Pieces) {
 			PieceButton a = ChessBoard.getButtonAtLocation(new Location(piece
 					.getRow(), piece.getCol()));
 			a.setEnabled(enable);
 		}
 
+	}
+
+	public boolean potentialKill(Piece pieceMoving, Location currentLocation) {
+		PieceButton btnKillLocation = ChessBoard
+				.getButtonAtLocation(currentLocation);
+		char pieceTeam = pieceMoving.getTeam();
+		// Check what team the piece attempting to move is on
+		if (pieceTeam == 'w') {
+			// Check if location is okay to move to for a kill
+			if (btnKillLocation.getPiece().getTeam() == 'b')
+				return true;
+			else
+				return false;
+		} else {
+			if (btnKillLocation.getPiece().getTeam() == 'w')
+				return true;
+			else
+				return false;
+		}
+	}
+
+	public void removePiece(Piece pieceRemoved) {
+		if (pieceRemoved != null) {
+			for (int i = 0; i<BlackPieces.size();i++) {
+				Piece piece = BlackPieces.get(i);
+				if (pieceRemoved.equals(piece))
+					BlackPieces.remove(piece);
+			}
+			for (int i = 0; i<WhitePieces.size();i++) {
+				Piece piece = WhitePieces.get(i);
+				if (pieceRemoved.equals(piece))
+					WhitePieces.remove(piece);
+			}
+			
+		}
 	}
 
 }

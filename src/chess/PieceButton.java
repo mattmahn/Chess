@@ -14,14 +14,17 @@ public class PieceButton extends JButton {
 		super();
 	}
 
-	public void setPiece(Piece p) {
+	public Piece setPiece(Piece p) {
+		Piece oldPiece = housedPiece;
 		housedPiece = p;
 		if (p == null) {
 			this.setIcon(null);
 			this.setDisabledIcon(null);
+			return null;
 		} else {
 			this.setIcon(p.getIcon());
 			this.setDisabledIcon(p.getIcon());
+			return oldPiece;
 		}
 	}
 

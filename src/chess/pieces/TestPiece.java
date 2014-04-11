@@ -33,4 +33,10 @@ public class TestPiece extends Piece {
 		return "TestPiece [pieceIcon=" + pieceIcon + "]";
 	}
 
+	@Override
+	public char getTeam() {
+		// TODO Auto-generated method stub
+		return 'b';
+	}
+
 }

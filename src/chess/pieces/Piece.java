@@ -72,6 +72,7 @@ public abstract class Piece {
 	 */
 	public abstract List<List<Location>> getMoveLocations();
 
+	public abstract char getTeam();
 	/**
 	 * Returns a string representation of this piece.
 	 *
