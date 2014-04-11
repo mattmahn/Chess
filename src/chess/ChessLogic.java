@@ -1,5 +1,6 @@
 package chess;
 
+
 import java.util.ArrayList;
 
 import chess.pieces.*;
@@ -32,41 +33,60 @@ public class ChessLogic {
 		// For now only adding rooks
 		for (int i = 0; i < 8; i++)
 			BlackPieces.add(new Rook(1, i, 'b'));
-		BlackPieces.add(new King(0,4,'b'));
+		BlackPieces.add(new King(0, 4, 'b'));
 		for (int i = 0; i < 8; i++)
 			WhitePieces.add(new Rook(6, i, 'w'));
-		WhitePieces.add(new King(7,3,'w'));
+		WhitePieces.add(new King(7, 3, 'w'));
 		// Disable Blacks Pieces because of new game
-		// enablePeices(BlackPieces, false);
+		enablePieces(BlackPieces, false);
+		//Enable White Pieces because of new game
+		enablePieces(WhitePieces,true);
 	}
 
 	public void updateLogic() {
-		// First change turn to opposite color
-		// if (isWhitesTurn) {
-		// enablePeices(WhitePieces,false);
-		// enablePeices(BlackPieces,true);
-		// isWhitesTurn = false;
-		//
-		// }
-		// else {
-		// enablePeices(BlackPieces,false);
-		// enablePeices(WhitePieces,true);
-		// isWhitesTurn = true;
-		// }
 		// Check for win
-		checkWin();
+		if (checkBlackWin()) {
+			System.out.println("Black Has won!");
+		}
+		if (checkWhiteWin()) {
+			System.out.println("White Has won!");
+		}
+		//Change turn to opposite color
+		if (isWhitesTurn) {
+			enablePieces(WhitePieces, false);
+			enablePieces(BlackPieces, true);
+			isWhitesTurn = false;
+
+		} else {
+			enablePieces(BlackPieces, false);
+			enablePieces(WhitePieces, true);
+			isWhitesTurn = true;
+		}
+
 
 	}
 
-	private void checkWin() {
-
+	private boolean checkWhiteWin() {
+		for (Piece piece : BlackPieces) {
+			if (piece instanceof King)
+				return false;
+		}
+		return true;
 	}
 
-	private void enablePeices(ArrayList<Piece> Pieces, boolean enable) {
+	private boolean checkBlackWin() {
+		for (Piece piece : WhitePieces) {
+			if (piece instanceof King)
+				return false;
+		}
+		return true;
+	}
+
+	private void enablePieces(ArrayList<Piece> Pieces, boolean enable) {
 		for (Piece piece : Pieces) {
 			PieceButton a = ChessBoard.getButtonAtLocation(new Location(piece
 					.getRow(), piece.getCol()));
-			a.setEnabled(enable);
+			a.setActive(enable);
 		}
 
 	}
@@ -92,17 +112,17 @@ public class ChessLogic {
 
 	public void removePiece(Piece pieceRemoved) {
 		if (pieceRemoved != null) {
-			for (int i = 0; i<BlackPieces.size();i++) {
+			for (int i = 0; i < BlackPieces.size(); i++) {
 				Piece piece = BlackPieces.get(i);
 				if (pieceRemoved.equals(piece))
 					BlackPieces.remove(piece);
 			}
-			for (int i = 0; i<WhitePieces.size();i++) {
+			for (int i = 0; i < WhitePieces.size(); i++) {
 				Piece piece = WhitePieces.get(i);
 				if (pieceRemoved.equals(piece))
 					WhitePieces.remove(piece);
 			}
-			
+
 		}
 	}
 

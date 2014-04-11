@@ -1,5 +1,6 @@
 package chess;
 
+
 import chess.pieces.Piece;
 import chess.pieces.Rook;
 
@@ -92,7 +93,7 @@ public class Board extends JFrame {
 	private boolean isValidLocationOnGird(Location currentLocation) {
 		int col = currentLocation.getCol();
 		int row = currentLocation.getRow();
-		if(col>7 || row>7 || col<0 || row<0)
+		if (col > 7 || row > 7 || col < 0 || row < 0)
 			return false;
 		return true;
 	}
@@ -191,19 +192,22 @@ public class Board extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				PieceButton btnClicked = findbtn(event);
-				if (isOccupied(btnClicked)) {
-					if (btnClicked.isFocused()) {
-						btnClicked.setFocused(false);
-						btnToMovePieceFrom = null;
-						removeFocuses();
-					} else {
-						removeFocuses();
-						btnToMovePieceFrom = btnClicked;
-						btnClicked.setFocused(true);
-						getValidLocations(btnClicked.getPiece());
+				if (btnClicked.isActive()) {
+					if (isOccupied(btnClicked)) {
+						if (btnClicked.isFocused()) {
+							btnClicked.setFocused(false);
+							btnToMovePieceFrom = null;
+							removeFocuses();
+						} else {
+							removeFocuses();
+							btnToMovePieceFrom = btnClicked;
+							btnClicked.setFocused(true);
+							getValidLocations(btnClicked.getPiece());
+						}
 					}
 				}
-
+				else
+					removeFocuses();
 			}
 
 		};
@@ -213,7 +217,7 @@ public class Board extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				PieceButton btnToMoveTo = findbtn(e);
-				if (btnToMoveTo.isFocused()) {
+				if (btnToMoveTo.isFocused() && !(btnToMoveTo.equals(btnToMovePieceFrom))) {
 					movePieceToBtn(btnToMoveTo);
 				}
 			}
