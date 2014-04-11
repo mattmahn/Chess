@@ -28,24 +28,6 @@ public class Location {
    }
 
    /**
-    * Returns the row of this Location.
-    *
-    * @return the row of this location
-    */
-   public int getRow() {
-      return row;
-   }
-
-   /**
-    * Returns the column of this location.
-    *
-    * @return the column of this location
-    */
-   public int getCol() {
-      return col;
-   }
-
-   /**
     * Returns the adjacent location towards {@code direction}. If an invalid direction was passed, null is returned.
     * This method does not guaranty the returned Location is bounded in a standard chess board.
     *
@@ -90,6 +72,7 @@ public class Location {
     * @param target the target Location
     * @return whether or not the target represents the same row and column as this Location
     */
+   @Override
    public boolean equals(Object target) {
       boolean isEqual = false;
       if(target instanceof Location) {
@@ -98,6 +81,24 @@ public class Location {
       }
 
       return isEqual;
+   }
+
+   /**
+    * Returns the row of this Location.
+    *
+    * @return the row of this location
+    */
+   public int getRow() {
+      return row;
+   }
+
+   /**
+    * Returns the column of this location.
+    *
+    * @return the column of this location
+    */
+   public int getCol() {
+      return col;
    }
 
    /**
