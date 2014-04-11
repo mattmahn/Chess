@@ -22,6 +22,7 @@ public class Board extends JFrame {
 	 */
 	private ArrayList<ArrayList<PieceButton>> board = new ArrayList<ArrayList<PieceButton>>();
 	private PieceButton btnToMovePieceFrom = null;
+	private ChessLogic CL;
 
 	/**
 	 * Creates a 8x8 JFrame filled with empty PieceButtons.
@@ -29,6 +30,7 @@ public class Board extends JFrame {
 	public Board() {
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		createBlankBoard();
+		CL = new ChessLogic(this);
 		this.setSize(700, 700);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
@@ -69,7 +71,6 @@ public class Board extends JFrame {
 	 */
 	public void getValidLocations(Piece piece) {
 		List<List<Location>> locs = piece.getMoveLocations();
-		Location pieceLocation = piece.getLocation();
 		for (List<Location> loc : locs) {
 			for(int i = 0; i <loc.size();i++){
 				Location currentLocation = loc.get(i);
@@ -90,7 +91,7 @@ public class Board extends JFrame {
 	 *            Piece that will be placed on the board.
 	 */
 	public void placePiece(Piece piece) {
-		board.get(piece.getRow()).get(piece.getCol()).setIcon(piece.getIcon());
+		board.get(piece.getRow()).get(piece.getCol()).setPiece(piece);
 	}
 
 	/**
@@ -102,50 +103,6 @@ public class Board extends JFrame {
 		// TODO Auto-generated method stub
 		initBtns();
 		addBtnsToBoard();
-		placeNewSetOfPeices();
-	}
-
-	// TODO create all different types of pieces and set their locations.
-	private void placeNewSetOfPeices() {
-		// Piece myPiece = new TestPiece(4, 4);
-		// board.get(3).get(3).setPiece(new TestPiece(3, 3));
-		board.get(5).get(5).setPiece(new Rook(5, 5, 'b'));
-		board.get(3).get(5).setPiece(new Rook(3, 5, 'b'));
-		board.get(4).get(3).setPiece(new Rook(4, 3, 'w'));
-//		ActionListener testPieceListener = new ActionListener() {
-//
-//			@Override
-//			public void actionPerformed(ActionEvent event) {
-//				PieceButton btnClicked = findbtn(event);
-//				if (isOccupied(btnClicked)) {
-//					if (btnClicked.isFocused()) {
-//						btnClicked.setFocused(false);
-//						removeFocuses();
-//					} else {
-//						removeFocuses();
-//						btnClicked.setFocused(true);
-//						getValidLocations(btnClicked.getPiece());
-//					}
-//				}
-//			}
-//
-//		};
-//		ActionListener testMoveListener = new ActionListener(){
-//
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				// TODO Auto-generated method stub
-//				PieceButton btnToMoveTo = findbtn(e);
-//				if(btnToMoveTo.isFocused()){
-//					btnToMoveTo.setBackground(Color.red);
-//					removeFocuses();
-//				}
-//			}
-//			
-//		};
-//		board.get(3).get(5).addActionListener(testPieceListener);
-//		board.get(5).get(5).addActionListener(testPieceListener);
-//		board.get(4).get(3).addActionListener(testPieceListener);
 	}
 
 	/**
@@ -275,6 +232,7 @@ public class Board extends JFrame {
 			btnToMoveTo.setPiece(pieceToMove);
 			Location locOfBtnToMoveTo = findLocationOfButton(btnToMoveTo);
 			pieceToMove.setLocation(new Location(locOfBtnToMoveTo.getRow(),locOfBtnToMoveTo.getCol()));
+			CL.updateLogic();
 		}
 	}
 
