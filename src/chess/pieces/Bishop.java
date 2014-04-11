@@ -20,10 +20,10 @@ public class Bishop extends Piece {
       this.team = team;
       switch(team) {
          case 'b':
-            icon = new ImageIcon("images/king_black.png");
+            icon = new ImageIcon("images/bishop_black.png");
             break;
          case 'w':
-            icon = new ImageIcon("images/king_white.png");
+            icon = new ImageIcon("images/bishop_white.png");
             break;
          default:
             throw new IllegalArgumentException("Team must be 'b' for black team or 'w' for white team.");
