@@ -115,14 +115,13 @@ public class Board extends JFrame {
     * @return PieceButton that caused the event.
     */
    protected PieceButton findbtn(ActionEvent event) {
-      PieceButton empty = null;
       for(int row = 0; row < 8; row++) {
          for(int col = 0; col < 8; col++) {
             if(board.get(row).get(col).equals(event.getSource()))
                return board.get(row).get(col);
          }
       }
-      return empty;
+      return null;
    }
 
 	/**
@@ -159,7 +158,7 @@ public class Board extends JFrame {
    }
 
    /**
-    * Highlights the avaliable locations for the peice to move to
+    * Highlights the available locations for the piece to move to
     *
     * @param piece
     */
