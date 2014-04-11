@@ -46,6 +46,17 @@ public class Knight extends Piece {
       foo.add(new Location(location.getRow() - 2, location.getCol() - 1));
       moveLocs.add(foo);
       foo = new ArrayList<>();
+      foo.add(new Location(location.getRow() - 1, location.getCol() + 2));
+      moveLocs.add(foo);
+      foo = new ArrayList<>();
+      foo.add(new Location(location.getRow() - 2, location.getCol() + 1));
+      moveLocs.add(foo);
+      foo = new ArrayList<>();
+      foo.add(new Location(location.getRow() + 1, location.getCol() - 2));
+      moveLocs.add(foo);
+      foo = new ArrayList<>();
+      foo.add(new Location(location.getRow() + 2, location.getCol() - 1));
+      moveLocs.add(foo);
 
       return moveLocs;
    }
