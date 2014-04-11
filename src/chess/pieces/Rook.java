@@ -8,9 +8,6 @@ import java.util.List;
 
 public class Rook extends Piece {
 
-   private ImageIcon icon;
-   private char team;
-
    /**
     * Creates a rook piece with the location of ({@code row},{@code col}) on {@code team} team.
     *
@@ -31,20 +28,6 @@ public class Rook extends Piece {
          default:
             throw new IllegalArgumentException("Team must be 'b' for black team or 'w' for white team.");
       }
-   }
-
-   /**
-    * Returns the team of the piece.
-    *
-    * @return the team of the piece
-    */
-   public char getTeam() {
-      return team;
-   }
-
-   @Override
-   public ImageIcon getIcon() {
-      return icon;
    }
 
    /**

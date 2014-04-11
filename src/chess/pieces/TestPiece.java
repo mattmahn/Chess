@@ -12,10 +12,7 @@ public class TestPiece extends Piece {
 
    public TestPiece(int row, int col) {
       super(row, col);
-   }
-
-   public ImageIcon getIcon() {
-      return pieceIcon;
+      team = 'b';
    }
 
    @Override
@@ -31,12 +28,6 @@ public class TestPiece extends Piece {
    @Override
    public String toString() {
       return "TestPiece [pieceIcon=" + pieceIcon + "]";
-   }
-
-   @Override
-   public char getTeam() {
-      // TODO Auto-generated method stub
-      return 'b';
    }
 
 }
