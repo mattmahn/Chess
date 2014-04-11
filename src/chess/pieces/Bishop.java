@@ -12,8 +12,9 @@ public class Bishop extends Piece {
    /**
     * Creates a bishop piece at a given row and column.
     *
-    * @param row the row of this piece on the board
-    * @param col the column of this piece on the board
+    * @param row  the row of this piece on the board
+    * @param col  the column of this piece on the board
+    * @param team the team this piece belongs to
     */
    public Bishop(int row, int col, char team) {
       super(row, col);

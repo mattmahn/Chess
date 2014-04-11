@@ -14,29 +14,28 @@ import java.util.List;
  * Creates a board that allows the user to play a game of chess
  *
  * @author Jordan Longato,Matthew Mahnke
- *
  */
 public class Board extends JFrame {
-	/**
-	 * The PieceButtons that are placed onto the board.
-	 */
-	private ArrayList<ArrayList<PieceButton>> board = new ArrayList<ArrayList<PieceButton>>();
-	private PieceButton btnToMovePieceFrom = null;
-	private ChessLogic CL;
+   /**
+    * The PieceButtons that are placed onto the board.
+    */
+   private ArrayList<ArrayList<PieceButton>> board = new ArrayList<ArrayList<PieceButton>>();
+   private PieceButton btnToMovePieceFrom = null;
+   private ChessLogic CL;
 
-	/**
-	 * Creates a 8x8 JFrame filled with empty PieceButtons.
-	 */
-	public Board() {
-		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		createBlankBoard();
-		CL = new ChessLogic(this);
-		this.setSize(700, 700);
-		this.setLocationRelativeTo(null);
-		this.setVisible(true);
-	}
+   /**
+    * Creates a 8x8 JFrame filled with empty PieceButtons.
+    */
+   public Board() {
+      this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+      createBlankBoard();
+      CL = new ChessLogic(this);
+      this.setSize(700, 700);
+      this.setLocationRelativeTo(null);
+      this.setVisible(true);
+   }
 
-	/**
+   /**
     * Creates a board that is ready for gameplay. <br>
     * This board has all pieces set in their appropriate starting positions and
     * awaits for the user to make the first move.
@@ -46,7 +45,7 @@ public class Board extends JFrame {
       addBtnsToBoard();
    }
 
-	/**
+   /**
     * Creates a new board
     */
    private void initBtns() {
@@ -94,7 +93,7 @@ public class Board extends JFrame {
       }
    }
 
-	/**
+   /**
     * Adds empty PieceButtons to the board. <br>
     */
    private void addBtnsToBoard() {
@@ -124,12 +123,11 @@ public class Board extends JFrame {
       return null;
    }
 
-	/**
+   /**
     * Checks if the passed Button is occupied by a piece by checking if the
     * button has an Icon.
     *
-    * @param location
-    *            JButton being checked
+    * @param location JButton being checked
     * @return True if location has icon.
     */
    public boolean isOccupied(PieceButton location) {
@@ -160,7 +158,7 @@ public class Board extends JFrame {
    /**
     * Highlights the available locations for the piece to move to
     *
-    * @param piece
+    * @param piece the piece to get possible valid locations to move to
     */
    public void getValidLocations(Piece piece) {
       List<List<Location>> locs = piece.getMoveLocations();
@@ -180,7 +178,7 @@ public class Board extends JFrame {
          }
       }
 
-	}
+   }
 
    protected void movePieceToBtn(PieceButton btnToMoveTo) {
       if(btnToMovePieceFrom != null) {
@@ -232,7 +230,7 @@ public class Board extends JFrame {
    }
 
    /**
-    * Returns the board in as a ArrayList<ArrayList<PieceButton>>
+    * Returns the current state of the Board
     *
     * @return The list of all PieceButtons within the board
     */
@@ -243,8 +241,7 @@ public class Board extends JFrame {
    /**
     * Places the piece into a button that corresponds with the pieces location.
     *
-    * @param piece
-    *            Piece that will be placed on the board.
+    * @param piece Piece that will be placed on the board.
     */
    public void placePiece(Piece piece) {
       board.get(piece.getRow()).get(piece.getCol()).setPiece(piece);

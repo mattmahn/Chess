@@ -8,6 +8,13 @@ import java.util.List;
 
 public class King extends Piece {
 
+   /**
+    * Creates a king piece at a given row and column.
+    *
+    * @param row  the row of this piece on the board
+    * @param col  the column of this piece on the board
+    * @param team the team this piece belongs to
+    */
    public King(int row, int col, char team) {
       super(row, col);
       this.team = team;
