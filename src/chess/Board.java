@@ -158,7 +158,7 @@ public class Board extends JFrame {
    }
 
    /**
-    * Highlights the avaliable locations for the peice to move to
+    * Highlights the available locations for the piece to move to
     *
     * @param piece
     */
