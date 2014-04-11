@@ -26,8 +26,6 @@ public class King extends Piece {
    @Override
    public List<List<Location>> getMoveLocations() {
       List<List<Location>> moveLocs = new ArrayList<>();
-      System.out.println(this.getRow() + "" + this.getCol());
-
 
       List<Location> north = new ArrayList<Location>();
       north.add(location.getAdjacentLocation(Location.NORTH));
