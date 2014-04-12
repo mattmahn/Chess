@@ -49,7 +49,7 @@ public class Queen extends Piece {
       }
       // get locations North East
       List<Location> northEast = new ArrayList<>();
-      for(Location loc = location.getAdjacentLocation(Location.NORTH_EAST); Board.isValidLocationOnGird(loc); loc.getAdjacentLocation(Location.NORTH_EAST)) {
+      for(Location loc = location.getAdjacentLocation(Location.NORTH_EAST); Board.isValidLocationOnGird(loc); loc = loc.getAdjacentLocation(Location.NORTH_EAST)) {
          northEast.add(loc);
       }
       // get locations East
@@ -59,7 +59,7 @@ public class Queen extends Piece {
       }
       // get location South East
       List<Location> southEast = new ArrayList<>();
-      for(Location loc = location.getAdjacentLocation(Location.SOUTH_EAST); Board.isValidLocationOnGird(loc); loc.getAdjacentLocation(Location.SOUTH_EAST)) {
+      for(Location loc = location.getAdjacentLocation(Location.SOUTH_EAST); Board.isValidLocationOnGird(loc); loc = loc.getAdjacentLocation(Location.SOUTH_EAST)) {
          southEast.add(loc);
       }
       // get locations South
@@ -69,7 +69,7 @@ public class Queen extends Piece {
       }
       // get locations South West
       List<Location> southWest = new ArrayList<>();
-      for(Location loc = location.getAdjacentLocation(Location.SOUTH_WEST); Board.isValidLocationOnGird(loc); loc.getAdjacentLocation(Location.SOUTH_WEST)) {
+      for(Location loc = location.getAdjacentLocation(Location.SOUTH_WEST); Board.isValidLocationOnGird(loc); loc = loc.getAdjacentLocation(Location.SOUTH_WEST)) {
          southWest.add(loc);
       }
       //get locations West
@@ -79,7 +79,7 @@ public class Queen extends Piece {
       }
       // get locations North West
       List<Location> northWest = new ArrayList<>();
-      for(Location loc = location.getAdjacentLocation(Location.NORTH_WEST); Board.isValidLocationOnGird(loc); loc.getAdjacentLocation(Location.NORTH_WEST)) {
+      for(Location loc = location.getAdjacentLocation(Location.NORTH_WEST); Board.isValidLocationOnGird(loc); loc = loc.getAdjacentLocation(Location.NORTH_WEST)) {
          northWest.add(loc);
       }
 
