@@ -1,6 +1,5 @@
 package chess;
 
-
 import java.util.ArrayList;
 
 import chess.pieces.*;
@@ -30,13 +29,32 @@ public class ChessLogic {
 	private void initPieces() {
 		BlackPieces = new ArrayList<Piece>();
 		WhitePieces = new ArrayList<Piece>();
-		// For now only adding rooks
-		for (int i = 0; i < 8; i++)
-			BlackPieces.add(new Rook(1, i, 'b'));
+		// Add pawns
+		for (int i = 0; i < 8; i++){
+			BlackPieces.add(new Pawn(1, i, 'b'));
+			WhitePieces.add(new Pawn(6, i, 'w'));
+		}
+		//Add rooks
+		BlackPieces.add(new Rook(0,0,'b'));
+		BlackPieces.add(new Rook(0,7,'b'));
+		WhitePieces.add(new Rook(7,0,'w'));
+		WhitePieces.add(new Rook(7,7,'w'));
+		//Add Knights
+		BlackPieces.add(new Knight(0,1,'b'));
+		BlackPieces.add(new Knight(0,6,'b'));
+		WhitePieces.add(new Knight(7,1,'w'));
+		WhitePieces.add(new Knight(7,6,'w'));
+		//Add bishop
+		BlackPieces.add(new Bishop(0,2,'b'));
+		BlackPieces.add(new Bishop(0,5,'b'));
+		WhitePieces.add(new Bishop(7,2,'w'));
+		WhitePieces.add(new Bishop(7,5,'w'));
+		//Add Queen
+		BlackPieces.add(new Queen(0,3,'b'));
+		WhitePieces.add(new Queen(7,3,'w'));
+		//Add kings
 		BlackPieces.add(new King(0, 4, 'b'));
-		for (int i = 0; i < 8; i++)
-			WhitePieces.add(new Rook(6, i, 'w'));
-		WhitePieces.add(new King(7, 3, 'w'));
+		WhitePieces.add(new King(7, 4, 'w'));
 		// Disable Blacks Pieces because of new game
 		enablePieces(BlackPieces, false);
 		//Enable White Pieces because of new game
@@ -51,7 +69,7 @@ public class ChessLogic {
 		if (checkWhiteWin()) {
 			System.out.println("White Has won!");
 		}
-		//Change turn to opposite color
+		// Change turn to opposite color
 		if (isWhitesTurn) {
 			enablePieces(WhitePieces, false);
 			enablePieces(BlackPieces, true);
@@ -62,7 +80,6 @@ public class ChessLogic {
 			enablePieces(WhitePieces, true);
 			isWhitesTurn = true;
 		}
-
 
 	}
 
