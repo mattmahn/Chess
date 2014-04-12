@@ -1,5 +1,6 @@
 package chess.pieces;
 
+import chess.Board;
 import chess.Location;
 
 import javax.swing.*;
@@ -43,23 +44,23 @@ public class Rook extends Piece {
 
       // get locations North
       List<Location> north = new ArrayList<Location>();
-      for(int j = row - 1; j >= 0; j--) {
-         north.add(new Location(j, col));
+      for(Location loc = location.getAdjacentLocation(Location.NORTH); Board.isValidLocationOnGird(loc); loc = loc.getAdjacentLocation(Location.NORTH)) {
+         north.add(loc);
       }
       // get locations East
       List<Location> east = new ArrayList<Location>();
-      for(int i = col + 1; i < 8; i++) {
-         east.add(new Location(row, i));
+      for(Location loc = location.getAdjacentLocation(Location.EAST); Board.isValidLocationOnGird(loc); loc = loc.getAdjacentLocation(Location.EAST)) {
+         east.add(loc);
       }
       // get locations South
       List<Location> south = new ArrayList<Location>();
-      for(int j = row + 1; j < 8; j++) {
-         south.add(new Location(j, col));
+      for(Location loc = location.getAdjacentLocation(Location.SOUTH); Board.isValidLocationOnGird(loc); loc = loc.getAdjacentLocation(Location.SOUTH)) {
+         south.add(loc);
       }
       //get locations West
       List<Location> west = new ArrayList<Location>();
-      for(int i = col - 1; i >= 0; i--) {
-         west.add(new Location(row, i));
+      for(Location loc = location.getAdjacentLocation(Location.WEST); Board.isValidLocationOnGird(loc); loc = loc.getAdjacentLocation(Location.WEST)) {
+         west.add(loc);
       }
 
       moveLocs.add(north);
