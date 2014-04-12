@@ -131,14 +131,7 @@ public class Board extends JFrame {
     * @return True if location has icon.
     */
    public boolean isOccupied(PieceButton location) {
-      try {
-         if(location.getIcon() != null) {
-            return true;
-         } else
-            return false;
-      } catch(ArrayIndexOutOfBoundsException e) {
-         return false;
-      }
+      return location.getIcon() != null;
    }
 
    /**
