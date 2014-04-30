@@ -199,12 +199,15 @@ public class Board extends JFrame {
 			boolean isSouthTwice = south.equals(currentLocation);
 			if(isNorthTwice || isSouthTwice)
 				getButtonAtLocation(currentLocation).setFocused(true);
-			pawn.hasMoved();
 		}
 	}
 
 	protected void movePieceToBtn(PieceButton btnToMoveTo) {
 		if (btnToMovePieceFrom != null) {
+			if(btnToMovePieceFrom.getPiece() instanceof Pawn){
+				Pawn pawn = (Pawn) btnToMovePieceFrom.getPiece();
+				pawn.hasMoved();
+			}
 			Piece pieceToMove = btnToMovePieceFrom.getPiece();
 			btnToMovePieceFrom.setPiece(null);
 			Piece pieceRemoved = btnToMoveTo.setPiece(pieceToMove);
@@ -269,10 +272,8 @@ public class Board extends JFrame {
 	 */
 	public void placePiece(Piece piece) {
 		board.get(piece.getRow()).get(piece.getCol()).setPiece(piece);
-	}
-
-	protected void overTakePiece(PieceButton btnToMoveTo) {
 
 	}
+
 
 }
