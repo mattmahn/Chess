@@ -54,7 +54,7 @@ public class Pawn extends Piece {
          vertical.add(location.getAdjacentLocation(Location.NORTH));
          if(isFirstMove){
             vertical.add(location.getAdjacentLocation(Location.NORTH).getAdjacentLocation(Location.NORTH));
-            isFirstMove = false;
+           
          }
          diagLeft.add(location.getAdjacentLocation(Location.NORTH_WEST));
          diagRight.add(location.getAdjacentLocation(Location.NORTH_EAST));
@@ -62,7 +62,7 @@ public class Pawn extends Piece {
          vertical.add(location.getAdjacentLocation(Location.SOUTH));
          if(isFirstMove){
             vertical.add(location.getAdjacentLocation(Location.SOUTH).getAdjacentLocation(Location.SOUTH));
-            isFirstMove = false;
+            
          }
          diagLeft.add(location.getAdjacentLocation(Location.SOUTH_WEST));
          diagRight.add(location.getAdjacentLocation(Location.SOUTH_EAST));
@@ -71,7 +71,7 @@ public class Pawn extends Piece {
       moveLocs.add(vertical);
       moveLocs.add(diagLeft);
       moveLocs.add(diagRight);
-
+      hasMoved();
       return moveLocs;
    }
 }
