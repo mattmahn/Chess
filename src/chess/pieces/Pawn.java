@@ -39,9 +39,16 @@ public class Pawn extends Piece {
    public void hasMoved() {
       isFirstMove = false;
    }
-   public boolean getIsFirstMove(){
-	   return isFirstMove;
+
+   /**
+    * Returns true if this pawn has not moved yet, otherwise false.
+    *
+    * @return true if this pawn has not moved yet, otherwise false
+    */
+   public boolean getIsFirstMove() {
+      return isFirstMove;
    }
+
    /**
     * Returns all possible move locations of this piece.
     *
