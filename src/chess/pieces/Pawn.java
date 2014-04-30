@@ -36,10 +36,12 @@ public class Pawn extends Piece {
    /**
     * Marks the pawn as having already moved, so it cannot move two spaces forward.
     */
-   public void hasMoved() {
+   private void hasMoved() {
       isFirstMove = false;
    }
-
+   public boolean getIsFirstMove(){
+	   return isFirstMove;
+   }
    /**
     * Returns all possible move locations of this piece.
     *
