@@ -52,14 +52,18 @@ public class Pawn extends Piece {
       List<Location> vertical = new ArrayList<>(), diagLeft = new ArrayList<>(), diagRight = new ArrayList<>();
       if(team == 'w') {
          vertical.add(location.getAdjacentLocation(Location.NORTH));
-         if(isFirstMove)
+         if(isFirstMove){
             vertical.add(location.getAdjacentLocation(Location.NORTH).getAdjacentLocation(Location.NORTH));
+            isFirstMove = false;
+         }
          diagLeft.add(location.getAdjacentLocation(Location.NORTH_WEST));
          diagRight.add(location.getAdjacentLocation(Location.NORTH_EAST));
       } else {
          vertical.add(location.getAdjacentLocation(Location.SOUTH));
-         if(isFirstMove)
+         if(isFirstMove){
             vertical.add(location.getAdjacentLocation(Location.SOUTH).getAdjacentLocation(Location.SOUTH));
+            isFirstMove = false;
+         }
          diagLeft.add(location.getAdjacentLocation(Location.SOUTH_WEST));
          diagRight.add(location.getAdjacentLocation(Location.SOUTH_EAST));
       }
