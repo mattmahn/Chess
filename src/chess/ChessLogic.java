@@ -1,9 +1,9 @@
 package chess;
 
+import chess.pieces.*;
+
 import java.util.ArrayList;
 
-import chess.pieces.*;
-import chess.pieces.Rook;
 /**
  * <p>This class monitors the state of the game by organizing al lthe pieces into
  * a list. It also dictates who's turn it is and when the player may interact with
@@ -28,6 +28,7 @@ public class ChessLogic {
 	 * Variable that determines whose turn it is.
 	 */
 	private boolean isWhitesTurn = true;
+
 	/**
 	 * <p>Produces a Chess Logic that will maintain the gameplay
 	 * of Chess so long as after each action done to the board 
@@ -42,18 +43,19 @@ public class ChessLogic {
 		ChessBoard = board;
 		placeNewPeices();
 	}
+
 	/**
 	 * Places a new set of white and black Chess pieces onto the board
 	 * and adds them to the board.
 	 */
 	private void placeNewPeices() {
-		// TODO Auto-generated method stub
 		initPieces();
 		for (Piece piece : BlackPieces)
 			ChessBoard.placePiece(piece);
 		for (Piece piece : WhitePieces)
 			ChessBoard.placePiece(piece);
 	}
+
 	/**
 	 * Initializes a new set of pieces for white and black
 	 */
@@ -91,6 +93,7 @@ public class ChessLogic {
 		// Enable White Pieces because of new game
 		enablePieces(WhitePieces, true);
 	}
+
 	/**
 	 * Updates the logic of this class by checking if there 
 	 * a player has won the game. If a player has not won
@@ -118,6 +121,7 @@ public class ChessLogic {
 		}
 
 	}
+
 	/**
 	 * Checks if white has won by checking to see if
 	 * there is still a king in the list of pieces.
@@ -130,6 +134,7 @@ public class ChessLogic {
 		}
 		return true;
 	}
+
 	/**
 	 * Checks if black has won by checking to see if 
 	 * there is still a king in the list of pieces.
@@ -142,6 +147,7 @@ public class ChessLogic {
 		}
 		return true;
 	}
+
 	/**
 	 * Enables the list of pieces based on enable
 	 * @param Pieces Pieces to enable
@@ -155,6 +161,7 @@ public class ChessLogic {
 		}
 
 	}
+
 	/**
 	 * Checks to see if there a chance that a piece will over take another piece
 	 * by moving onto a spot. 
@@ -169,17 +176,12 @@ public class ChessLogic {
 		// Check what team the piece attempting to move is on
 		if (pieceTeam == 'w') {
 			// Check if location is okay to move to for a kill
-			if (btnKillLocation.getPiece().getTeam() == 'b')
-				return true;
-			else
-				return false;
+			return btnKillLocation.getPiece().getTeam() == 'b';
 		} else {
-			if (btnKillLocation.getPiece().getTeam() == 'w')
-				return true;
-			else
-				return false;
+			return btnKillLocation.getPiece().getTeam() == 'w';
 		}
 	}
+
 	/**
 	 * Removes a piece from the appropriate list of pieces
 	 * @param pieceRemoved Piece to be removed

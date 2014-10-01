@@ -115,8 +115,8 @@ public class Board extends JFrame {
 		JPanel mainContent = new JPanel();
 		mainContent.setLayout(new GridLayout(8, 8));
 		for (ArrayList<PieceButton> row : buttons) {
-			for (int col = 0; col < row.size(); col++) {
-				mainContent.add(row.get(col));
+			for(PieceButton pieceButton : row) {
+				mainContent.add(pieceButton);
 			}
 		}
 		this.add(mainContent, BorderLayout.CENTER);
@@ -175,20 +175,19 @@ public class Board extends JFrame {
 
 		// go through all locations
 		for (List<Location> loc : locs) {
-			for (int i = 0; i < loc.size(); i++) {
-				Location currentLocation = loc.get(i);
+			for(Location currentLocation : loc) {
 				//Check if the location is valid
-				if (isValidLocationOnGird(currentLocation)) {
+				if(isValidLocationOnGird(currentLocation)) {
 					//Check for a piece occupying the location
-					if (!isOccupied(getButtonAtLocation(currentLocation))) {
+					if(!isOccupied(getButtonAtLocation(currentLocation))) {
 						//Do special things if the piece is a pawn
-						if (piece instanceof Pawn) {
+						if(piece instanceof Pawn) {
 							Pawn pawn = (Pawn) piece;
 							checkPawnLocation(currentLocation, pawn);
 						} else
 							getButtonAtLocation(currentLocation).setFocused(true);
 					} else {
-						if (CL.potentialKill(piece, currentLocation))
+						if(CL.potentialKill(piece, currentLocation))
 							getButtonAtLocation(currentLocation).setFocused(true);
 						break;
 					}
@@ -217,6 +216,7 @@ public class Board extends JFrame {
 				getButtonAtLocation(currentLocation).setFocused(true);
 		}
 	}
+
 	/**
 	 * <p>Moves the piece that was on the last button clicked to the new PieceButton that is
 	 * passed to this method. After moving the piece to the new button the button last clicked
@@ -239,6 +239,7 @@ public class Board extends JFrame {
 			CL.updateLogic();
 		}
 	}
+
 	/**
 	 *<p>Determines if the location is valid based on the board.
 	 * A location is valid as long as its Row and Column is within the bounds of
@@ -249,9 +250,7 @@ public class Board extends JFrame {
 	public static boolean isValidLocationOnGird(Location currentLocation) {
 		int col = currentLocation.getCol();
 		int row = currentLocation.getRow();
-		if (col > 7 || row > 7 || col < 0 || row < 0)
-			return false;
-		return true;
+		return !(col > 7 || row > 7 || col < 0 || row < 0);
 	}
 
 	/**
@@ -270,6 +269,7 @@ public class Board extends JFrame {
 		}
 		return btn;
 	}
+
 	/**
 	 * Returns the location where the button is located at in the grid
 	 * @param btn Button to find location of
@@ -305,6 +305,4 @@ public class Board extends JFrame {
 		buttons.get(piece.getRow()).get(piece.getCol()).setPiece(piece);
 
 	}
-
-
 }

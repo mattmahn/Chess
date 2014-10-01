@@ -17,7 +17,6 @@ public class TestPiece extends Piece {
 
    @Override
    public List<List<Location>> getMoveLocations() {
-      // TODO Auto-generated method stub
       List<Location> b = new ArrayList<Location>();
       b.add(new Location(0, 0));
       List<List<Location>> a = new ArrayList<List<Location>>();
